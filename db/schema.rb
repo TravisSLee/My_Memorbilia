@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_02_165348) do
+ActiveRecord::Schema.define(version: 2020_12_02_211727) do
+
+  create_table "memorabilias", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "athlete_id"
+    t.boolean "autographed"
+    t.string "item_type"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

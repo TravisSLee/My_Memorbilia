@@ -5,11 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable
 
   def self.from_omniauth(auth)
+    binding.pry
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.provide = auth.provide
+      user.provider = auth.provider
       user.username = auth.info.name
       user.uid = auth.uid
-      user.email = auth.email
+      user.email = auth.info.email
       user.password = Devise.friendly_token[0...20]  
     end
   end
