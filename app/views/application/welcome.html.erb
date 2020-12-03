@@ -1,3 +1,10 @@
 <h2>Welcome to My Memorabilia</h2>
 
-<p> Please <a href="/signup">Sign Up</a> or <a href="/login">Log In</a> to continue.</p>
+<% if user_signed_in? %>
+    <ul>
+        <li><%= "Welcome, #{ @user.username }" %></li>
+        <li><%= link_to 'Memorabilias', memorabilias_path %></li>
+    </ul>
+<% else %>
+    <p> Please Signin or Signup for our please!!! </p>
+<% end %>

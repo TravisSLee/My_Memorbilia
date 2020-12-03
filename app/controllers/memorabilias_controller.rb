@@ -1,8 +1,9 @@
 class MemorabiliasController < ApplicationController
-    
-    
-    def index
+    before_action :set_memorabilia, only: [:show, :edit, :update]
+    before_action :require_login
 
+    def index
+        @memorabilias = Memorabilia.all
     end
 
     def new
@@ -26,6 +27,10 @@ class MemorabiliasController < ApplicationController
     end
 
     private
+
+    def set_memorabilia
+        @memorabilia = Memorabilia.find_by(id: params[:id])
+    end
 
     def memorabilia_params
         params.require(:memorabilia).permit(:user_id, :athlete_id, :price, :autographed, :item_type)
