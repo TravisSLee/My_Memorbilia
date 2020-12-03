@@ -10,13 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_02_211727) do
+ActiveRecord::Schema.define(version: 2020_12_03_180107) do
+
+  create_table "athletes", force: :cascade do |t|
+    t.string "name"
+    t.string "team"
+    t.boolean "active"
+  end
 
   create_table "memorabilias", force: :cascade do |t|
     t.integer "user_id"
     t.integer "athlete_id"
     t.boolean "autographed"
     t.string "item_type"
+    t.decimal "price"
   end
 
   create_table "users", force: :cascade do |t|

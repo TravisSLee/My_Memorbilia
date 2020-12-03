@@ -27,6 +27,7 @@ class MemorabiliasController < ApplicationController
 
     private
 
-
-
+    def memorabilia_params
+        params.require(:memorabilia).permit(:user_id, :athlete_id, :price, :autographed, :item_type)
+    end
 end
