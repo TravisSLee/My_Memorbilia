@@ -1,15 +1,14 @@
-<%= form_for(memorabilia) do |f|%>
+<h2>Fill out your memorabilia here!</h2>
+
+<%= form_for @memorabilia do |f|%>
  <p>
    <%= f.label :item_type %>
    <%= f.text_field :item_type %>
  </p>
+ <p> Select an athlete here or create a new one in the fields below!!</p>
+ <%= athlete_select(@memorabilia) %>
  <p>
-   <%= f.label :ahtlete_name %>
    <%= f.text_field :ahtlete_name %>
- </p>
- <p>
-   <%= f.label :price %>
-   <%= f.text_field :price %>
  </p>
  <p>
    <%= f.label :price %>
