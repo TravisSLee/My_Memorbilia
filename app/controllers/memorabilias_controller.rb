@@ -1,13 +1,13 @@
 class MemorabiliasController < ApplicationController
     before_action :set_memorabilia, only: [:show, :edit, :update, :delete]
-    before_action :authenicate_user!
+    before_action :authenticate_user!
 
     def index
         @memorabilias = current_user.memorabilias
     end
 
     def new
-        @memorabilia = Memorabilia.new
+        @memorabilia = Memorabilia.new(athlete_id: params[:athlete_id])
     end
 
     def create

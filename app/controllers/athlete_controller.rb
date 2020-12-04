@@ -1,2 +1,0 @@
-class AthleteController < ApplicationController
-end

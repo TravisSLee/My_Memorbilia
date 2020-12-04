@@ -3,7 +3,8 @@
 <ul>
 
 <% @memorabilias.each do |m|%>
-    <li><%= <%= link_to m.item_type, memorabilia_athlete_path(m) %> <li>
+    <li><%= link_to m.item_type, memorabilia_athlete_path(m) %> <li>
 <% end%>
-
+<br>
+<%= link_to "Add New Memorabilia", new_memorabilia_path %>
 </ul>
