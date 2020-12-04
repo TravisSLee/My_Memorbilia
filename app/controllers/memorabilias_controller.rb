@@ -3,7 +3,7 @@ class MemorabiliasController < ApplicationController
     before_action :authenicate_user!
 
     def index
-        @memorabilias = Memorabilia.all
+        @memorabilias = current_user.memorabilias
     end
 
     def new
