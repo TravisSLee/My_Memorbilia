@@ -1,0 +1,23 @@
+<%= form_for(memorabilia) do |f|%>
+ <p>
+   <%= f.label :item_type %>
+   <%= f.text_field :item_type %>
+ </p>
+ <p>
+   <%= f.label :ahtlete_name %>
+   <%= f.text_field :ahtlete_name %>
+ </p>
+ <p>
+   <%= f.label :price %>
+   <%= f.text_field :price %>
+ </p>
+ <p>
+   <%= f.label :price %>
+   <%= f.text_field :price %>
+ </p>
+ <p>
+   <%= f.label :autographed %>
+   <%= f.check_box_tag :autographed %>
+ </p>
+   <%= f.submit %>
+<% end %>

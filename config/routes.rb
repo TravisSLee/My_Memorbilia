@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => {registrations: 'registrations', omniauth_callbacks: 'callbacks'}
   root to: 'application#welcome'
-  resources :memorabilias
+  resources :memorabilias do 
+    resources :athletes, only: [:show]
+  end
   resources :athletes
 
   devise_scope :user do

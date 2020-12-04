@@ -1,17 +1,21 @@
 class MemorabiliasController < ApplicationController
-    before_action :set_memorabilia, only: [:show, :edit, :update]
-    before_action :require_login
+    before_action :set_memorabilia, only: [:show, :edit, :update, :delete]
+    before_action :authenicate_user!
 
     def index
         @memorabilias = Memorabilia.all
     end
 
     def new
-
+        @memorabilia = Memorabilia.new
     end
 
     def create
-
+      if @memorabilia
+        redirect_to memorabilia_path(@memorabilia)
+      else
+        render :new
+      end
     end
 
     def show
@@ -19,11 +23,22 @@ class MemorabiliasController < ApplicationController
     end
 
     def edit
-
+        
     end
 
     def update
+        @memorabilia.update(memorabilia_params)
+        if @memorabilia.save
+          redirect_to memorabilia_path(@memorabilia)
+        else
+          render :edit
+        end
+    end
 
+    def delete
+        @memorabilia.destroy
+        flash[:notice] = "You have deleted this item."
+        redirect_to memorabilias_path
     end
 
     private

@@ -1,1 +1,9 @@
-<h2>Just a test</h2>
+<h2>Here these are what you have in your collection!!</h2>
+
+<ul>
+
+<% @memorabilias.each do |m|%>
+    <li><%= <%= link_to m.item_type, memorabilia_athlete_path(m) %> <li>
+<% end%>
+
+</ul>
