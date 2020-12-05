@@ -1,20 +1,25 @@
 <h2>Fill out your memorabilia here!</h2>
 
-<%= form_for @memorabilia do |f| %>
+<%= form_for(@memorabilia) do |f| %>
  
   <%= f.label :item_type %>
   <%= f.text_field :item_type %>
  
   <p> Select an athlete here or create a new one in the fields below!!</p>
-  <%= athlete_select(@memorabilia) %>
- 
-  <%= f.text_field :ahtlete_name %>
-
+  <%= f.fields_for :athlete do |ath| %>
+    <%= ath.label :name %>
+    <%= ath.text_field :name %>
+    <%= ath.label :team %>
+    <%= ath.text_field :team %>
+    <%= ath.label :active %>
+    <%= ath.check_box :active %>
+  <% end %>
+  <br>
   <%= f.label :price %>
   <%= f.text_field :price %>
-
+  <br>
   <%= f.label :autographed %>
-  <%= f.check_box_tag :autographed %>
-  
+  <%= f.check_box :autographed %>
+  <br>
   <%= f.submit %>
 <% end %>

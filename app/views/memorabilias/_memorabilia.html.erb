@@ -1,12 +1,12 @@
-<h2><%= @athlete.name @memorabilia.item_type %></h1>
+<h2><%= @memorabilia.athlete.name  %>'s <%= @memorabilia.item_type %></h1>
 
 <p>Click the athlete's name below to visit their page</p>
 <ul>
     <li>
-        <%= @athlete.name %>
+        <%= @memorabilia.athlete.name %>
     </li>
 </ul>
 <p>Price: </p>
-<p><%= @memorabilia.price %></p><br>
+<p>$<%= @memorabilia.price %></p><br>
 <p>Autographed?: </p>
 <p><%= @memorabilia.autographed %></p>

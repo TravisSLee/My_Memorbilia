@@ -1,5 +1,5 @@
 class MemorabiliasController < ApplicationController
-    before_action :set_memorabilia, only: [:show, :edit, :update, :delete]
+    before_action :set_memorabilia, only: [:show, :create, :edit, :update, :delete]
     before_action :authenticate_user!
 
     def index
@@ -7,11 +7,13 @@ class MemorabiliasController < ApplicationController
     end
 
     def new
-        @memorabilia = Memorabilia.new(athlete_id: params[:athlete_id])
+        @memorabilia = current_user.memorabilias.build
+        @athlete = @memorabilia.build_athlete
     end
 
     def create
-      if @memorabilia
+      @memorabilia = current_user.memorabilias.new(memorabilia_params)
+      if @memorabilia.save
         redirect_to memorabilia_path(@memorabilia)
       else
         render :new
@@ -19,7 +21,7 @@ class MemorabiliasController < ApplicationController
     end
 
     def show
-
+      athtele = Athlete.find_by(id: params[:athlete_id])
     end
 
     def edit
@@ -48,6 +50,10 @@ class MemorabiliasController < ApplicationController
     end
 
     def memorabilia_params
-        params.require(:memorabilia).permit(:user_id, :athlete_id, :price, :autographed, :item_type)
+        params.require(:memorabilia).permit(:user_id, :athlete_id, :price, :autographed, :item_type, athlete_attributes: [
+          :name,
+          :team,
+          :active
+       ])
     end
 end
