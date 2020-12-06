@@ -3,7 +3,21 @@ class AthletesController < ApplicationController
     before_action :authenticate_user!
     
     def index
-        @athletes = current_user.athletes
+        @athletes = Athlete.all
+    end
+    
+    def new
+        @athlete = current_user.athletes.build
+    end
+
+    def create
+        @athlete = current_user.athletes.new(athlete_params)
+
+        if @athlete.save
+        redirect_to @athlete
+        else
+        render :new
+        end
     end
 
     def show
@@ -11,8 +25,11 @@ class AthletesController < ApplicationController
     end
 
     private 
-
     def set_athlete
         @athlete = Athlete.find_by(id: params[:id])
+    end
+
+    def athlete_params
+        params.require(:athlete).permit(:name, :team, :active)
     end
 end

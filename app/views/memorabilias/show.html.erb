@@ -1,1 +1,4 @@
-<%= render partial: "memorabilia" %>
+<%= render partial: 'memorabilia' %>
+
+<button><%= link_to "Edit Memorabilia",  edit_athlete_memorabilia_path(@athlete, @memorabilia) %></button>
+<button><%= link_to "Delete Memorabilia",  destroy_athlete_memorabilia_path(@athlete, @memorabilia) %></button>

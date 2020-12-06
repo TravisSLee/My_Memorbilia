@@ -1,3 +1,5 @@
 <%= @athletes.each do |athlete| %>
-    <%= @athletes.name %>
+    
 <% end %>
+<br>
+<button><%= link_to "Add New Athlete", new_athlete_path(@athlete) %></button>

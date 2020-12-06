@@ -1,14 +1,10 @@
-<h1>Create A New Athlete!</h1>
-
-<%= form_for @athlete %>
-    <br>
+<%= form_for(@athlete) do |f|%>
         <%= f.label :name %>
         <%= f.text_field :name %><br>
         <%= f.label :team %>
         <%= f.text_field :team %>
         <%= f.label :active %>
-        <%= f.check_box_tag :active %>
-    <br/>
+        <%= f.check_box :active %>
     <%= f.submit %>
 <% end %>
 

@@ -3,7 +3,7 @@
 <p>Click the athlete's name below to visit their page</p>
 <ul>
     <li>
-        <%= @memorabilia.athlete.name %>
+        <%= link_to @memorbilia.athlete.name, athlete_path(athlete) %>
     </li>
 </ul>
 <p>Price: </p>
