@@ -6,5 +6,5 @@
     <li><%= link_to "#{m.athlete.name}\'s #{m.item_type}", memorabilia_path(m) %> <li>
 <% end %>
 <br>
-<button><%= link_to "Add New Memorabilia",  new_athlete_memorabilia_path(@athlete, @memorabilia) %></button>
+<%= link_to 'New Memo', new_memorabilia_path %>
 </ul>

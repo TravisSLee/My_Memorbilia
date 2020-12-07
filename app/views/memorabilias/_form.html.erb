@@ -1,19 +1,7 @@
-<h2>Fill out your memorabilia here!</h2>
-
-<%= form_for(@memorabilia) do |f| %>
- 
+<%= form_for( @memorabilia ) do |f| %>
+  <% f.hidden_field :athlete_id , :value => @athlete.id %>
   <%= f.label :item_type %>
   <%= f.text_field :item_type %>
- 
-  <p> Select an athlete here or create a new one in the fields below!!</p>
-  <%= f.fields_for :athlete do |ath| %>
-    <%= ath.label :name %>
-    <%= ath.text_field :name %>
-    <%= ath.label :team %>
-    <%= ath.text_field :team %>
-    <%= ath.label :active %>
-    <%= ath.check_box :active %>
-  <% end %>
   <br>
   <%= f.label :price %>
   <%= f.text_field :price %>
@@ -21,5 +9,6 @@
   <%= f.label :autographed %>
   <%= f.check_box :autographed %>
   <br>
+  
   <%= f.submit %>
 <% end %>
