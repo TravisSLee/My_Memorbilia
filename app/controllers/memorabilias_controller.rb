@@ -9,7 +9,7 @@ class MemorabiliasController < ApplicationController
           if @athlete.nil?
             redirect_to root_path
           else
-            @memorabilias = current_user.athlete.memorabilias
+            @memorabilias = current_user.memorabilias
           end
         else
           @memorabilias = current_user.memorabilias
@@ -22,10 +22,9 @@ class MemorabiliasController < ApplicationController
     end
 
     def create
-    
-      @memorabilia = current_user.athlete.memorabilias.create(memorabilia_params)
+      @memorabilia = current_user.memorabilias.create(memorabilia_params)
       if @memorabilia.save
-        redirect_to athlete_memorabilia_path(@memorabilia)
+        redirect_to athlete_memorabilia_path
       else
         render :new
       end

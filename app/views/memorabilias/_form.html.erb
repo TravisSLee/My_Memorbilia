@@ -1,5 +1,4 @@
-<%= form_for( @memorabilia ) do |f| %>
-  <% f.hidden_field :athlete_id , :value => @athlete.id %>
+<%= form_for(@memorabilia) do |f| %>
   <%= f.label :item_type %>
   <%= f.text_field :item_type %>
   <br>
@@ -9,6 +8,15 @@
   <%= f.label :autographed %>
   <%= f.check_box :autographed %>
   <br>
-  
+  <p>Fill out the athlete below!<p>
+  <%= f.fields_for :athlete do |ath| %>
+    
+    <%= ath.label :name %>  
+    <%= ath.text_field :name %>
+    <%= ath.label :team %>
+    <%= ath.text_field :team %>
+    <%= ath.label :active %>
+    <%= ath.check_box :active %>
+  <% end %>
   <%= f.submit %>
 <% end %>
