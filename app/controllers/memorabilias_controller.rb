@@ -1,19 +1,19 @@
 class MemorabiliasController < ApplicationController
-    before_action :set_athlete, except: [:new, :index]
-    before_action :set_memorabilia, only: [:show, :edit, :update, :delete]
+    before_action :set_athlete, except: [:new,:create, :show, :index]
+    before_action :set_memorabilia, only: [:edit, :update, :delete]
     before_action :authenticate_user!
 
     def index
       if params[:athlete_id]
-        @athlete = Athlete.find_by(id: params[:athlete_id])
-          if @athlete.nil?
+        athlete = current_user.athletes.find_by(id: params[:athlete_id])
+          if athlete.nil?
             redirect_to root_path
           else
-            @memorabilias = current_user.memorabilias
-          end
-        else
-          @memorabilias = current_user.memorabilias
-        end
+            @memorabilias = athlete.memorabilias
+          end 
+      else
+        @memorabilias = current_user.memorabilias
+      end
     end
 
     def new
@@ -22,16 +22,26 @@ class MemorabiliasController < ApplicationController
     end
 
     def create
-      @memorabilia = current_user.memorabilias.create(memorabilia_params)
+      @memorabilia = current_user.memorabilias.build(memorabilia_params)
+      @athlete = Athletes.find_or_create_by(id: params[:athlete_id])
       if @memorabilia.save
-        redirect_to athlete_memorabilia_path
+        redirect_to athlete_memorabilia_path(@athlete)
       else
         render :new
       end
     end
 
     def show
-      athlete = Athlete.find_by(id: params[:athlete_id])
+      if params[:athlete_id]
+        @athlete = current_user.athletes.find_by(id: params[:athlete_id])
+          if @athlete.nil?
+            redirect_to root_path, alert: "Athlete not found"
+          else
+            @memorabilias = @athlete.memorabilias
+          end
+      else
+          redirect_to memorabilias_path
+       end
     end
 
     def edit
@@ -57,11 +67,11 @@ class MemorabiliasController < ApplicationController
 
 
     def set_athlete
-      @athtele = current_user.athletes.find_by(id: params[:athlete_id])
+      @athlete = current_user.athletes.find_by(id: params[:athlete_id])
     end
 
     def set_memorabilia
-      @memorabilia = @athlete.memorabilias.find_by(id: params[:id])
+      @memorabilia = current_user.memorabilias.find_by(id: params[:id])
     end
 
     def memorabilia_params

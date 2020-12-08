@@ -1,15 +1,15 @@
-<h2><%= @memorabilia.athlete.name  %>'s <%= @memorabilia.item_type %></h1>
+<h2><%= @athlete.name  %>'s <%= @memorabilia.item_type %></h1>
 
 <p>Click the athlete's name below to visit their page</p>
 <ul>
     <li>
-        <%= link_to @memorbilia.athlete.name, athlete_path(athlete) %>
+        <%= link_to @memorabilia.athlete.name, athlete_path(@athlete) %>
     </li>
 </ul>
 <p>Price: </p>
 <p>$<%= @memorabilia.price %></p><br>
 <p>Autographed?: </p>
 <p><%= @memorabilia.autographed %></p>
+<%= link_to "Back", :back %>
 
-<button><%= link_to "Edit Memorabilia",  edit_athlete_memorabilia_path(@athlete, @memorabilia) %></button>
-<button><%= link_to "Delete Memorabilia",  destroy_athlete_memorabilia_path(@athlete, @memorabilia) %></button>
+

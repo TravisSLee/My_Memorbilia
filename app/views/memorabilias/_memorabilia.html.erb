@@ -1,1 +1,3 @@
-# loop through memorabilias
+<% @memorabilias.each do |m|%>
+    <li><%= link_to "$#{m.price} #{m.item_type}", memorabilia_path(m) %> </li>
+<% end %>

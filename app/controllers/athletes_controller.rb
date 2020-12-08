@@ -5,10 +5,6 @@ class AthletesController < ApplicationController
     def index
         @athletes = current_user.athletes
     end
-    
-    def new
-        @athlete = current_user.athletes.build
-    end
 
     def create
         @athlete = current_user.athletes.build(athlete_params)
@@ -20,13 +16,13 @@ class AthletesController < ApplicationController
     end
 
     def show
-        @memorabilia = @athlete.memorabilias.build
+        @memorabilias = @athlete.memorabilias
     end
 
     private 
 
     def set_athlete
-        @athlete = Athlete.find_by(id: params[:id])
+        @athlete = current_user.athletes.find_by(id: params[:id])
     end
 
     def athlete_params
