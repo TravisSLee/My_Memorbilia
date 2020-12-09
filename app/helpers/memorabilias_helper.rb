@@ -5,5 +5,5 @@ module MemorabiliasHelper
         else
           hidden_field_tag "memorabilia[athlete_id]", memorabilia.athlete_id
         end
-      end
+    end
 end

@@ -20,10 +20,10 @@
   <%= f.check_box :autographed %>
   <br>
   <% if @athlete.id %>
-
+    <%= f.hidden_field :athlete_id :value => @athlete.id %>
   <% else %>
     <p>Fill out the athlete below!<p>
-    
+    <%= athlete_select(memorabilia) %>
     <%= f.fields_for :athlete, @athlete do |ath| %>
       <%= ath.label :name %>  
       <%= ath.text_field :name %>
