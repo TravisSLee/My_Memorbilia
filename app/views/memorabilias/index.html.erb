@@ -2,8 +2,11 @@
 
 <ul>
 <% @memorabilias.each do |m|%>
-    <li><%= link_to "#{m.athlete.name}\'s #{m.item_type}", athlete_memorabilia_path(@athlete, m) %><li>
+    <li><%= link_to "#{m.athlete.name}\'s #{m.item_type}", memorabilia_path(m) %></li>
 <% end %>
-<br>
-<%= link_to 'New Memomorabilia', new_memorabilia_path %>
 </ul>
+<% if @athlete %>
+    <%= link_to 'New Memomorabilia', new_athlete_memorabilia_path(@athlete) %>
+<% else%>
+    <%= link_to 'New Memomorabilia', new_memorabilia_path %>
+<% end %>

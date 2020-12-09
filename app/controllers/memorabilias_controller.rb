@@ -5,11 +5,11 @@ class MemorabiliasController < ApplicationController
 
     def index
       if params[:athlete_id]
-        athlete = current_user.athletes.find_by(id: params[:athlete_id])
-          if athlete.nil?
+        @athlete = current_user.athletes.find_by(id: params[:athlete_id])
+          if @athlete.nil?
             redirect_to root_path
           else
-            @memorabilias = athlete.memorabilias
+            @memorabilias = @athlete.memorabilias
           end 
       else
         @memorabilias = current_user.memorabilias
@@ -17,15 +17,19 @@ class MemorabiliasController < ApplicationController
     end
 
     def new
-      @memorabilia = current_user.memorabilias.build
-      @athlete = @memorabilia.build_athlete
+      if params[:athlete_id]
+        @athlete = current_user.athletes.find_by(id: params[:athlete_id])
+        @memorabilia = @athlete.memorabilias.build
+      else  
+        @memorabilia = current_user.memorabilias.build
+        @athlete = @memorabilia.build_athlete
+      end
     end
 
     def create
       @memorabilia = current_user.memorabilias.build(memorabilia_params)
-      @athlete = Athletes.find_or_create_by(id: params[:athlete_id])
       if @memorabilia.save
-        redirect_to athlete_memorabilia_path(@athlete)
+        redirect_to athlete_memorabilia_path(@memorabilia.athlete, @memorabilia)
       else
         render :new
       end
@@ -37,10 +41,11 @@ class MemorabiliasController < ApplicationController
           if @athlete.nil?
             redirect_to root_path, alert: "Athlete not found"
           else
-            @memorabilias = @athlete.memorabilias
+            @memorabilia = @athlete.memorabilias.find_by(id: params[:id])
           end
       else
-          redirect_to memorabilias_path
+          @memorabilia = current_user.memorabilias.find_by(id: params[:id])
+        
        end
     end
 
