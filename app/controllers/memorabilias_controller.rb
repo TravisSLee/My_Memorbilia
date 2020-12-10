@@ -45,7 +45,6 @@ class MemorabiliasController < ApplicationController
           end
       else
           @memorabilia = current_user.memorabilias.find_by(id: params[:id])
-        
        end
     end
 
