@@ -1,9 +1,9 @@
 class AthletesController < ApplicationController
-    before_action :set_athlete, only: [:show, :create]
+    before_action :set_athlete, only: [:show]
     before_action :authenticate_user!
     
     def index
-        @athletes = current_user.athletes
+        @athletes = current_user.athletes.uniq(&:name)
     end
 
     def create
@@ -16,7 +16,11 @@ class AthletesController < ApplicationController
     end
 
     def show
-        @memorabilias = @athlete.memorabilias
+        if @athlete.nil?
+            redirect_to athletes_path, alert: "Athlete not found!"
+        else
+            @memorabilias = @athlete.memorabilias
+        end
     end
 
     private 

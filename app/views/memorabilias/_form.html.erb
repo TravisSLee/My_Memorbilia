@@ -19,13 +19,12 @@
   <%= f.label :autographed %>
   <%= f.check_box :autographed %>
   <br>
-  <% if @athlete.id %>
-    <%= f.hidden_field :athlete_id, :value => @athlete.id %>
+  <% if params[:athlete_id] %>
+    <%= f.hidden_field :athlete_id, :value => params[:athlete_id] %>
   <% else %>
     <p>Fill out the athlete below!<p>
-    <% binding.pry %>
-    <%= select_tag "memorabilia[athlete]", options_from_collection_for_select(Athlete.all., :id, :name) %><br>
-    <%= f.fields_for :athlete, @athlete do |ath| %>
+    <%= f.fields_for :athlete do |ath| %>
+      <%= athlete_select(@memorabilia) %><br>
       <%= ath.label :name %>  
       <%= ath.text_field :name %><br>
       <%= ath.label :team %>

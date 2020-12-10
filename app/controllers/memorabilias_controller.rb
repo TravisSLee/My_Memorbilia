@@ -1,13 +1,13 @@
 class MemorabiliasController < ApplicationController
-    before_action :set_athlete, except: [:new,:create, :show, :index]
+    before_action :set_athlete, except: [:new, :index]
     before_action :set_memorabilia, only: [:edit, :update, :delete]
     before_action :authenticate_user!
 
     def index
       if params[:athlete_id]
-        @athlete = current_user.athletes.find_by(id: params[:athlete_id])
+        set_athlete
           if @athlete.nil?
-            redirect_to root_path
+            redirect_to root_path, alert: "Athlete not found"
           else
             @memorabilias = @athlete.memorabilias
           end 
@@ -18,7 +18,7 @@ class MemorabiliasController < ApplicationController
 
     def new
       if params[:athlete_id]
-        @athlete = current_user.athletes.find_by(id: params[:athlete_id])
+        set_athlete
         @memorabilia = @athlete.memorabilias.build
       else  
         @memorabilia = current_user.memorabilias.build
@@ -37,6 +37,19 @@ class MemorabiliasController < ApplicationController
 
     def show
       if params[:athlete_id]
+        set_athlete
+          if @athlete.nil?
+            redirect_to root_path, alert: "Athlete not found"
+          else
+            @memorabilia = @athlete.memorabilias.find_by(id: params[:id])
+          end
+      else
+         set_memorabilia
+       end
+    end
+
+    def edit
+      if params[:athlete_id]
         @athlete = current_user.athletes.find_by(id: params[:athlete_id])
           if @athlete.nil?
             redirect_to root_path, alert: "Athlete not found"
@@ -44,18 +57,14 @@ class MemorabiliasController < ApplicationController
             @memorabilia = @athlete.memorabilias.find_by(id: params[:id])
           end
       else
-          @memorabilia = current_user.memorabilias.find_by(id: params[:id])
+          set_memorabilia
        end
-    end
-
-    def edit
-        
     end
 
     def update
         @memorabilia.update(memorabilia_params)
         if @memorabilia.save
-          redirect_to memorabilia_path(@memorabilia)
+          redirect_to athlete_memorabilia_path(@memorabilia.athlete, @memorabilia)
         else
           render :edit
         end

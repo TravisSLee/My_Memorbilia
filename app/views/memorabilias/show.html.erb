@@ -10,6 +10,7 @@
 <p>$<%= @memorabilia.price %></p><br>
 <p>Autographed?: </p>
 <p><%= @memorabilia.autographed %></p>
-<%= link_to "Back", :back %>
+<%= link_to 'Edit This Memorabilia', edit_athlete_memorabilia_path(@memorabilia.athlete, @memorabilia) %><br>
+<%= link_to "Back", athlete_memorabilias_path(@memorabilia.athlete) %>
 
 

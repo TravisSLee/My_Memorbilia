@@ -1,5 +1,4 @@
 <h2>Here these are what you have in your collection!!</h2>
-
 <ul>
 <% @memorabilias.each do |m|%>
     <li><%= link_to "#{m.athlete.name}\'s #{m.item_type}", memorabilia_path(m) %></li>
