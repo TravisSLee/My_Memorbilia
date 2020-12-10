@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
     helper_method :require_login
+    add_flash_types :info, :error, :warning
     
     def welcome
         if user_signed_in?

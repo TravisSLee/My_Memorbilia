@@ -1,6 +1,6 @@
 class MemorabiliasController < ApplicationController
     before_action :set_athlete, except: [:new, :index]
-    before_action :set_memorabilia, only: [:edit, :update, :delete]
+    before_action :set_memorabilia, only: [:edit, :update, :destroy]
     before_action :authenticate_user!
 
     def index
@@ -50,7 +50,7 @@ class MemorabiliasController < ApplicationController
 
     def edit
       if params[:athlete_id]
-        @athlete = current_user.athletes.find_by(id: params[:athlete_id])
+        set_athlete
           if @athlete.nil?
             redirect_to root_path, alert: "Athlete not found"
           else
@@ -70,10 +70,12 @@ class MemorabiliasController < ApplicationController
         end
     end
 
-    def delete
+    def destroy
+        binding.pry
+        set_athlete
+        @memorabilia = @athlete.memorabilias.find_by(id: params[:id])
         @memorabilia.destroy
-        flash[:notice] = "You have deleted this item."
-        redirect_to memorabilias_path
+        redirect_to athlete_memorabilias_path(@athlete)
     end
 
     private
