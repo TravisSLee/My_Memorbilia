@@ -12,7 +12,7 @@
 <p><%= @memorabilia.autographed %></p>
 
 <%= link_to 'Edit This Memorabilia', edit_athlete_memorabilia_path(@memorabilia.athlete, @memorabilia) %><br>
-<%= link_to "Delete This Memorabilia", athlete_memorabilia_path(@memorabilia.athlete_id, @memorabilia.id), method: :delete %><br>
+<%= button_to "Delete This Memorabilia", athlete_memorabilia_path(@memorabilia.athlete_id, @memorabilia.id), method: :delete %><br>
 <%= link_to "Back", athlete_memorabilias_path(@memorabilia.athlete) %>
 
 

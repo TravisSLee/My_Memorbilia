@@ -5,5 +5,5 @@ class Memorabilia < ApplicationRecord
     validates :item_type, :price, presence: true
 
 
-    # scope :expensive, -> { where(price: > 100 }
+    scope :expensive, -> { where("price > 100") }
 end

@@ -23,8 +23,8 @@
     <%= f.hidden_field :athlete_id, :value => params[:athlete_id] %>
   <% else %>
     <p>Fill out the athlete below!<p>
+    <%= select_tag "memorabilia[athlete_id]", options_from_collection_for_select(Athlete.all, :id, :name), :include_blank => true %><br> 
     <%= f.fields_for :athlete, @athlete do |ath| %>
-      <%= athlete_select(@memorabilia) %><br>
       <%= ath.label :name %>  
       <%= ath.text_field :name %><br>
       <%= ath.label :team %>

@@ -10,7 +10,9 @@ class MemorabiliasController < ApplicationController
             redirect_to root_path, alert: "Athlete not found"
           else
             @memorabilias = @athlete.memorabilias
-          end 
+          end
+      elsif params[:expensive]
+        @memorabilias =  current_user.memorabilias.expensive
       else
         @memorabilias = current_user.memorabilias
       end
@@ -28,6 +30,7 @@ class MemorabiliasController < ApplicationController
 
     def create
       @memorabilia = current_user.memorabilias.build(memorabilia_params)
+      binding.pry
       if @memorabilia.save
         redirect_to athlete_memorabilia_path(@memorabilia.athlete, @memorabilia)
       else
@@ -71,7 +74,6 @@ class MemorabiliasController < ApplicationController
     end
 
     def destroy
-        binding.pry
         set_athlete
         @memorabilia = @athlete.memorabilias.find_by(id: params[:id])
         @memorabilia.destroy

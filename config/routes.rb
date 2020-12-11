@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :athletes do 
     resources :memorabilias
   end
+  
 
   devise_scope :user do
     get 'login', to: 'devise/sessions#new', as: 'login' 
