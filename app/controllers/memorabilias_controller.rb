@@ -11,8 +11,10 @@ class MemorabiliasController < ApplicationController
           else
             @memorabilias = @athlete.memorabilias
           end
-      elsif params[:expensive]
-        @memorabilias =  current_user.memorabilias.expensive
+      elsif params[:search_term]
+        if params[:search_term] == "expensive"
+          @memorabilias =  current_user.memorabilias.expensive
+        end
       else
         @memorabilias = current_user.memorabilias
       end
