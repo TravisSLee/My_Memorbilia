@@ -23,14 +23,12 @@
         <%= f.hidden_field :athlete_id %>
     <% else %>
         <h4>Athlete Info: </h4>
-        <p> Select from an existing athlete <br><br>
-        <%= f.collection_select :athlete_id, Athlete.all, :id, :name, include_blank: "Choose Athlete"  %></p><br>
-        <p> OR create a new one <br><br>
-        <%= f.fields_for :athlete, @memorabilia.build_athlete do |athlete_memorabilia| %>
-            <%= athlete_memorabilia.text_field :name, placeholder: "Athlete" %>
-            <%= athlete_memorabilia.text_field :team, placeholder: "Team" %>
-            <%= athlete_memorabilia.label :active %>
-            <%= athlete_memorabilia.check_box :active %>
+        <p> Create a new one <br><br>
+        <%= f.fields_for :athlete, @athlete do |ath| %>
+            <%= ath.text_field :name, placeholder: "Name" %>
+            <%= ath.text_field :team, placeholder: "Team" %>
+            <%= ath.label :active %>
+            <%= ath.check_box :active %>
         <% end %></p>
     <% end %>
     <%= f.submit class: "btn btn-secondary btn-sm text-white" %>

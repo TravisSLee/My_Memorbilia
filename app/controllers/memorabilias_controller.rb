@@ -33,7 +33,7 @@ class MemorabiliasController < ApplicationController
     def create
       @memorabilia = current_user.memorabilias.build(memorabilia_params)
       if @memorabilia.save
-        redirect_to athlete_memorabilia_path(@memorabilia.athlete, @memorabilia)
+        redirect_to @memorabilia
       else
         render :new
       end

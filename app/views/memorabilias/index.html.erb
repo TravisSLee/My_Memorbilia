@@ -1,4 +1,9 @@
-<h2>Here these are what you have in your collection!!</h2>
+<% if @athlete %>
+    <h2>Here's the memorabilia you have of <%= @athlete.name %></h2>
+<% else %>
+    <h2>Here these are what you have in your collection!!</h2>
+<% end %>
+
 <% if @memorabilias.nil? %>
 <h3>Please record your Memorabilia now!!</h3>
 <% else %>

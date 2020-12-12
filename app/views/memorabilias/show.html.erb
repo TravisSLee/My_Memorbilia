@@ -1,11 +1,5 @@
-<h2><%= @memorabilia.athlete.name  %>'s <%= @memorabilia.item_type %></h1>
-
-<p>Click the athlete's name below to visit their page</p>
-<ul>
-    <li>
-        <%= link_to @memorabilia.athlete.name, athlete_path(@memorabilia.athlete) %>
-    </li>
-</ul>
+<h2><%= link_to @memorabilia.athlete.name, athlete_path(@memorabilia.athlete) %>'s <%= @memorabilia.item_type %></h1>
+<p>Click the athlete's name above to visit their page</p>
 <p>Price: </p>
 <p>$<%= @memorabilia.price %></p><br>
 <p>Autographed?: </p>
