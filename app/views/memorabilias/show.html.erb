@@ -9,7 +9,7 @@
 <p>Price: </p>
 <p>$<%= @memorabilia.price %></p><br>
 <p>Autographed?: </p>
-<p><%= @memorabilia.autographed %></p>
+<p><%= @memorabilia.autographed.to_s.capitalize %></p>
 
 <%= link_to 'Edit This Memorabilia',  edit_athlete_memorabilia_path(@memorabilia.athlete, @memorabilia) %><br>
 <%= button_to "Delete This Memorabilia", athlete_memorabilia_path(@memorabilia.athlete_id, @memorabilia.id), method: :delete %><br>

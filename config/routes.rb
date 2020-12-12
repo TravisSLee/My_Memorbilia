@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => {registrations: 'registrations', omniauth_callbacks: 'callbacks'}
   root to: 'application#welcome'
-  
+  get 'memorabilias/search_term/:search_term', to: 'memorabilias#index'
   resources :memorabilias 
-  resources :athletes do 
+  resources :athletes, execpt: :destroy do 
     resources :memorabilias
   end
-  get 'memorabilias/search_term/:search_term', to: 'memorabilias#index'
+  
  
 
   devise_scope :user do
