@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2020_12_03_180107) do
     t.integer "athlete_id"
     t.boolean "autographed"
     t.string "item_type"
-    t.decimal "price"
+    t.decimal "price", precision: 10, scale: 2
   end
 
   create_table "users", force: :cascade do |t|

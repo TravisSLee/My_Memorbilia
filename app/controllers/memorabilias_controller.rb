@@ -32,7 +32,6 @@ class MemorabiliasController < ApplicationController
 
     def create
       @memorabilia = current_user.memorabilias.build(memorabilia_params)
-      binding.pry
       if @memorabilia.save
         redirect_to athlete_memorabilia_path(@memorabilia.athlete, @memorabilia)
       else

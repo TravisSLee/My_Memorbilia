@@ -1,13 +1,17 @@
 <h2>Here these are what you have in your collection!!</h2>
-<ul>
-<% @memorabilias.each do |m|%>
-    <%= link_to "#{m.athlete.name}\'s #{m.item_type}", athlete_memorabilia_path(m.athlete, m) %>
-    <%= link_to 'Edit', edit_athlete_memorabilia_path(m.athlete, m) %><br>
+<% if @memorabilias.nil? %>
+<h3>Please record your Memorabilia now!!</h3>
+<% else %>
+    <ul>
+    <% @memorabilias.each do |m|%>
+        <%= link_to "#{m.athlete.name}\'s #{m.item_type}", athlete_memorabilia_path(m.athlete, m) %>
+        <%= link_to 'Edit', edit_athlete_memorabilia_path(m.athlete, m) %><br>
+    <% end %>
+    </ul>
 <% end %>
-</ul>
 <% if @athlete %>
     <%= link_to 'New Memorabilia', new_athlete_memorabilia_path(@athlete) %>
 <% else %>
-    <%= link_to 'New Memomorabilia', new_memorabilia_path %>
+    <%= link_to 'New Memorabilia', new_memorabilia_path %>
 <% end %>
 <%= link_to 'Expensive Memorabilias', '/memorabilias/search_term/expensive' %>
