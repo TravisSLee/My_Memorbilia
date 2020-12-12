@@ -1,13 +1,13 @@
- <% if @memorabilia.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@memorabilia.errors.count, "error") %> prohibited this memorabilia from being saved:</h2>
-      <ul>
-        <% @memorabilia.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% if @memorabilia.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@memorabilia.errors.count, "error") %> prohibited this memorabilia from being saved:</h2>
+    <ul>
+      <% @memorabilia.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <%= form_for(@memorabilia) do |f| %>
   <%= f.label :item_type %>
@@ -20,17 +20,18 @@
   <%= f.check_box :autographed %>
   <br>
   <% if params[:athlete_id] %>
-    <%= f.hidden_field :athlete_id, :value => params[:athlete_id] %>
-  <% else %>
-    <p>Fill out the athlete below!<p>
-    <%= f.fields_for :athlete, @athlete do |ath| %>
-      <%= ath.label :name %>  
-      <%= ath.text_field :name %><br>
-      <%= ath.label :team %>
-      <%= ath.text_field :team %><br>
-      <%= ath.label :active %>
-      <%= ath.check_box :active %><br>
+        <%= f.hidden_field :athlete_id %>
+    <% else %>
+        <h4>Athlete Info: </h4>
+        <p> Select from an existing athlete <br><br>
+        <%= f.collection_select :athlete_id, Athlete.all, :id, :name, include_blank: "Choose Athlete"  %></p><br>
+        <p> OR create a new one <br><br>
+        <%= f.fields_for :athlete, @memorabilia.build_athlete do |athlete_memorabilia| %>
+            <%= athlete_memorabilia.text_field :name, placeholder: "Athlete" %>
+            <%= athlete_memorabilia.text_field :team, placeholder: "Team" %>
+            <%= athlete_memorabilia.label :active %>
+            <%= athlete_memorabilia.check_box :active %>
+        <% end %></p>
     <% end %>
-  <% end %>
-  <%= f.submit %>
+    <%= f.submit class: "btn btn-secondary btn-sm text-white" %>
 <% end %>
