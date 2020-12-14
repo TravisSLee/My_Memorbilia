@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'application#welcome'
   get 'memorabilias/search_term/:search_term', to: 'memorabilias#index'
   resources :memorabilias 
-  resources :athletes, execpt: :destroy do 
+  resources :athletes, execpt: [:edit, :update, :destroy] do 
     resources :memorabilias
   end
   
