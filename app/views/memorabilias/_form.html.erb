@@ -22,6 +22,7 @@
   <% if params[:athlete_id] %>
         <%= f.hidden_field :athlete_id %>
     <% else %>
+        <%= select_tag 'memorabilia[athlete_id]', options_from_collection_for_select(Athlete.all, :id, :name), :include_blank => true %>
         <h4>Athlete Info: </h4>
         <p> Create a new one <br><br>
         <%= f.fields_for :athlete, @athlete do |ath| %>
