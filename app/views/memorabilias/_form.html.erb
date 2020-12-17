@@ -22,9 +22,9 @@
   <% if params[:athlete_id] %>
         <%= f.hidden_field :athlete_id %>
     <% else %>
-        <%= select_tag 'memorabilia[athlete_id]', options_from_collection_for_select(Athlete.all, :id, :name), :include_blank => true %>
-        <h4>Athlete Info: </h4>
-        <p> Create a new one <br><br>
+        <h3>Select an existing athlete</h3>
+        <%= athlete_select(@memorabilia) %>
+        <p> Or create a new one <br><br>
         <%= f.fields_for :athlete, @athlete do |ath| %>
             <%= ath.text_field :name, placeholder: "Name" %>
             <%= ath.text_field :team, placeholder: "Team" %>
