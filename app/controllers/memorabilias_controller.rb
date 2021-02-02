@@ -9,14 +9,20 @@ class MemorabiliasController < ApplicationController
           if @athlete.nil?
             redirect_to root_path, alert: "Athlete not found"
           else
-            @memorabilias = @athlete.memorabilias
+            if params[:search_term]
+              if params[:search_term] == "cheapest"
+                @memorabilias =  current_user.memorabilias.cheapest
+              end
+            else
+              @memorabilias = @athlete.memorabilias.search(params[:query])
+            end
           end
       elsif params[:search_term]
         if params[:search_term] == "expensive"
           @memorabilias =  current_user.memorabilias.expensive
         end
       else
-        @memorabilias = current_user.memorabilias
+        @memorabilias = current_user.memorabilias.search(params[:query])
       end
     end
 

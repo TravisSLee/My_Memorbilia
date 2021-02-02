@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'memorabilias/search_term/:search_term', to: 'memorabilias#index'
   resources :memorabilias 
   resources :athletes, execpt: [:edit, :update, :destroy] do 
+    get 'memorabilias/search_term/:search_term', to: 'memorabilias#index'
     resources :memorabilias
   end
   

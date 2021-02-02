@@ -3,7 +3,7 @@ class AthletesController < ApplicationController
     before_action :authenticate_user!
     
     def index
-        @athletes = current_user.athletes.uniq(&:name)
+        @athletes = current_user.athletes.search(params[:query]).uniq(&:name)
     end
 
     def create

@@ -1,14 +1,6 @@
 <% if @memorabilia.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@memorabilia.errors.count, "error") %> prohibited this memorabilia from being saved:</h2>
-    <ul>
-      <% @memorabilia.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
+  <%= render partial: 'errors', locals: {memorabilia: @memorabilia}%>
 <% end %>
-
 <%= form_for(@memorabilia) do |f| %>
   <%= f.label :item_type %>
   <%= f.text_field :item_type %>

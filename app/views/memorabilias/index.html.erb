@@ -16,6 +16,7 @@
 <% end %>
 <% if @athlete %>
     <%= link_to 'New Memorabilia', new_athlete_memorabilia_path(@athlete) %>
+    <%= link_to 'Cheapest Memorabilias', 'memorabilias/search_term/cheapest' %>
 <% else %>
     <%= link_to 'New Memorabilia', new_memorabilia_path %><br>
     <%= link_to 'Expensive Memorabilias', '/memorabilias/search_term/expensive' %>
