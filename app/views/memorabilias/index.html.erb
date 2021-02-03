@@ -1,7 +1,13 @@
 <% if @athlete %>
     <h2>Here's the memorabilia you have of <%= @athlete.name %></h2>
+    <%= form_tag athlete_memorabilias_path, method: :get do %>
+       <%= render 'query' %>
+    <% end %>
 <% else %>
     <h2>Here these are what you have in your collection!!</h2>
+    <%= form_tag memorabilias_path, method: :get do %>
+       <%= render 'query' %>
+    <% end %>
 <% end %>
 
 <% if @memorabilias.nil? %>
@@ -9,7 +15,7 @@
 <% else %>
     <ul>
     <% @memorabilias.each do |m|%>
-        <%= link_to "#{m.athlete.name}\'s #{m.item_type}", athlete_memorabilia_path(m.athlete, m) %>
+        <%= link_to "$#{m.price} - #{m.athlete.name}\'s #{m.item_type}", athlete_memorabilia_path(m.athlete, m) %>
         <%= link_to 'Edit', edit_athlete_memorabilia_path(m.athlete, m) %><br>
     <% end %>
     </ul>
