@@ -9,13 +9,7 @@ class MemorabiliasController < ApplicationController
           if @athlete.nil?
             redirect_to root_path, alert: "Athlete not found"
           else
-            if params[:search_term]
-              if params[:search_term] == "cheapest"
-                @memorabilias =  current_user.memorabilias.cheapest
-              end
-            else
               @memorabilias = @athlete.memorabilias.search(params[:query])
-            end
           end
       elsif params[:search_term]
         if params[:search_term] == "expensive"
@@ -43,6 +37,26 @@ class MemorabiliasController < ApplicationController
       else
         render :new
       end
+    end
+
+    def cheapest
+      if params[:athlete_id]
+        set_athlete
+          if @athlete.nil?
+            redirect_to root_path, alert: "Athlete not found"
+          else
+            if @athlete.memorabilias.nil?
+              redirect_to athlete_path, alert: "Memorabilias not found"
+            else
+              @memorabilia = Memorabilia.where(user_id: current_user.id, athlete_id: params[:athlete_id])
+              @memorabilia = @memorabilia.cheapest[0]
+            end
+          end
+      end
+    end
+
+    def cheap
+      @memorabilias =  current_user.memorabilias.cheap
     end
 
     def show

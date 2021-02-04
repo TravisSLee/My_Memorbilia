@@ -5,8 +5,9 @@ class Memorabilia < ApplicationRecord
     validates :item_type, :price, presence: true
 
     scope :expensive, -> { where("price > 100") }
-    scope :cheap, -> { order(price: :desc) } 
-    scope :cheapest, -> { cheap.first }
+    scope :cheap, -> { order(price: :asc) }
+    scope :cheapest, -> { includes(:athlete).order(price: :asc).limit(1) } 
+    # scope :cheapest, -> { cheap.limit(1) }
 
     def self.search(query)
         if query

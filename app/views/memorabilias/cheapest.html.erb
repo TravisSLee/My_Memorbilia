@@ -1,0 +1,5 @@
+<h2>You are viewing <%= @memorabilia.athlete.name %>'s cheapest memorabilia</h2>
+<ul>
+    <%= link_to "$#{@memorabilia.price} - #{@memorabilia.athlete.name}\'s #{@memorabilia.item_type}", athlete_memorabilia_path(@memorabilia.athlete, @memorabilia) %>
+</ul>
+<%= link_to "Back", athlete_memorabilias_path(@memorabilia.athlete) %>
